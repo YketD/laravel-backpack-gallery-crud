@@ -1,12 +1,13 @@
 {
     "name": "yketd/backpackgallerycrud",
+    "type": "library",
     "description": "Gallery management interface for Laravel 5 using Backpack CRUD.",
     "keywords": [
         "laravel backpack",
         "gallery", "galleries",
         "manage galleries"
     ],
-    "homepage": "https://github.com/seandowney/laravel-backpack-gallery-crud",
+    "homepage": "https://github.com/yketd/laravel-backpack-gallery-crud",
     "license": "MIT",
     "authors": [{
         "name": "Seán Downey",
