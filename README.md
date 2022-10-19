@@ -1,11 +1,10 @@
-# SeanDowney\BackpackGalleryCrud
+# YketD\BackpackGalleryCrud
 
-
-## Moved to https://gitlab.com/seandowney/laravel-backpack-gallery-crud
-
+Attempt to make the gallery crud field from Backpack work with Laravel 8 & 9.
 
 
 
+# Original docs: SeanDowney\BackpackGalleryCrud
 
 [![Latest Version on Packagist][ico-version]](link-packagist)
 [![Software License][ico-license]](LICENSE.md)
