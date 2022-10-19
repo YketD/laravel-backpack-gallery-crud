@@ -1,6 +1,6 @@
 {
     "name": "yketd/backpackgallerycrud",
-    "type": "library",
+    "type": "package",
     "description": "Gallery management interface for Laravel 5 using Backpack CRUD.",
     "keywords": [
         "laravel backpack",
