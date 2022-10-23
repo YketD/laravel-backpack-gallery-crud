@@ -20,5 +20,8 @@ Route::group([
     'prefix' => config('backpack.base.route_prefix', 'admin'),
     'middleware' => ['web', 'admin'],
 ], function () {
+    Route::get('gallery', function (\http\Env\Request $request) {
+        return response()->json('test');
+    });
     Route::crud('gallery', 'GalleryCrudController');
 });
