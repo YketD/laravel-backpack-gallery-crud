@@ -2,6 +2,7 @@
 
 namespace SeanDowney\BackpackGalleryCrud\app\Models;
 
+use Illuminate\Support\Facades\Log;
 use Storage;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;

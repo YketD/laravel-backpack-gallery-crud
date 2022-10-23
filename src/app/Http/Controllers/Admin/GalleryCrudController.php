@@ -31,38 +31,6 @@ class GalleryCrudController extends CrudController {
                                   'hint' => 'Will be automatically generated from your title, if left empty.',
                               ]);
 
-        CRUD::addColumn([    // WYSIWYG
-                                   'name' => 'body',
-                                   'label' => 'Body',
-                                   'type' => 'ckeditor',
-                                   'placeholder' => 'Your textarea text here',
-                              ]);
-
-        CRUD::addColumn([ // Table
-                                'name' => 'image_items',
-                                'label' => 'Images',
-                                'type' => 'gallery_table',
-                                'entity_singular' => 'image_item', // used on the "Add X" button
-                                'columns' => [
-                                    'image' => 'Upload Image',
-                                    'caption' => 'Caption',
-                                ],
-                                'max' => 50, // maximum rows allowed in the table
-                                'min' => 0, // minimum rows allowed in the table
-                                'disk' => config('seandowney.gallerycrud.disk'),
-                              ]);
-
-        CRUD::addColumn([    // SELECT
-                                   'label' => 'Status',
-                                   'type' => 'select_from_array',
-                                   'name' => 'status',
-                                   'allows_null' => true,
-                                   'options' => [0 => 'Draft', 1 => 'Published'],
-                                   'value' => null,
-                              ]);
-
-        // ------ CRUD COLUMNS
-        CRUD::addColumn(['title']); // add multiple columns, at the end of the stack
         CRUD::addColumn([
                                    'name' => 'status',
                                    'label' => 'Status',
