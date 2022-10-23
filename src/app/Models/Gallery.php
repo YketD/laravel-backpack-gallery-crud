@@ -4,7 +4,7 @@ namespace SeanDowney\BackpackGalleryCrud\app\Models;
 
 use Storage;
 use Illuminate\Database\Eloquent\Model;
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
