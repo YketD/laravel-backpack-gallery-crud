@@ -2,8 +2,7 @@
 
 namespace SeanDowney\BackpackGalleryCrud\app\Models;
 
-use Illuminate\Support\Facades\Log;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -14,18 +13,18 @@ class Gallery extends Model
     use CrudTrait;
     use Sluggable, SluggableScopeHelpers;
 
-     /*
-    |--------------------------------------------------------------------------
-    | GLOBAL VARIABLES
-    |--------------------------------------------------------------------------
-    */
+    /*
+   |--------------------------------------------------------------------------
+   | GLOBAL VARIABLES
+   |--------------------------------------------------------------------------
+   */
 
     protected $table = 'galleries';
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $guarded = ['id'];
     protected $fillable = [
-        'title', 'slug', 'body', 'images', 'captions', 'status',
+        'title', 'slug', 'body', 'images', 'captions', 'status', 'public',
     ];
     protected $casts = [
         'images' => 'array',
@@ -38,7 +37,7 @@ class Gallery extends Model
      *
      * @return array
      */
-    public function sluggable(): array
+    public function sluggable()
     {
         return [
             'slug' => [
@@ -58,7 +57,7 @@ class Gallery extends Model
      *
      * @return string
      */
-    public function url(): string
+    public function url()
     {
         return route('view-gallery', $this->slug);
     }
@@ -97,7 +96,7 @@ class Gallery extends Model
     }
 
 
-    public function getImageItemsAttribute(): array
+    public function getImageItemsAttribute()
     {
         $disk = config('seandowney.gallerycrud.disk');
         $files = Storage::disk($disk)->files($this->slug);
@@ -118,6 +117,7 @@ class Gallery extends Model
                 $image_items[$file] = [
                     'image' => $file,
                     'image_path' => $this->images[$file]['image_path'],
+                    'thumbnail_path' => $this->images[$file]['thumbnail_path'],
                     'live' => isset($this->images[$file]) ? $this->images[$file]['live'] : 0,
                     'width' => $this->images[$file]['width'],
                     'height' => $this->images[$file]['height'],
@@ -129,10 +129,11 @@ class Gallery extends Model
         // add any new files to the end of the list
         foreach ($files as $file) {
             $file_path = $this->slug.'/'.$file;
-            $size_data = getimagesize(storage_path('app/'.$disk.'/'.$file_path));
+            $size_data = getimagesize(storage_path($disk.'/'.$file_path));
             $image_items[$file] = [
                 'image' => $file,
-                'image_path' => $file_path,
+                'image_path' => $disk.'/'.$file_path,
+                'thumbnail_path' => $disk.'/thumbnails/'.$file_path,
                 'live' => isset($this->images[$file]) ? $this->images[$file]['live'] : 0,
                 'width' => $size_data[0],
                 'height' => $size_data[1],
@@ -148,7 +149,7 @@ class Gallery extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-    public function setImagesAttribute($value): void
+    public function setImagesAttribute($value)
     {
         $disk = config('seandowney.gallerycrud.disk');
         $attribute_name = "images";
@@ -163,10 +164,11 @@ class Gallery extends Model
 
         foreach ($files as $key => $file_path) {
             $file = str_replace($this->slug.'/', '', $file_path);
-            $size_data = getimagesize(storage_path('app/'.$disk.'/'.$file_path));
+            $size_data = getimagesize(storage_path($disk.'/'.$file_path));
             $image_items[$file] = [
                 'image' => $file,
-                'image_path' => $file_path,
+                'image_path' => $disk.'/'.$file_path,
+                'thumbnail_path' => $disk.'/thumbnails/'.$file_path,
                 'live' => isset($value[$file]) ? $value[$file] : 0,
                 'width' => $size_data[0],
                 'height' => $size_data[1],
