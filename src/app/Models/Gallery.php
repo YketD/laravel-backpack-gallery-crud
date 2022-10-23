@@ -37,7 +37,7 @@ class Gallery extends Model
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [
@@ -57,7 +57,7 @@ class Gallery extends Model
      *
      * @return string
      */
-    public function url()
+    public function url(): string
     {
         return route('view-gallery', $this->slug);
     }
@@ -96,7 +96,7 @@ class Gallery extends Model
     }
 
 
-    public function getImageItemsAttribute()
+    public function getImageItemsAttribute(): array
     {
         $disk = config('seandowney.gallerycrud.disk');
         $files = Storage::disk($disk)->files($this->slug);
@@ -147,7 +147,7 @@ class Gallery extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-    public function setImagesAttribute($value)
+    public function setImagesAttribute($value): void
     {
         $disk = config('seandowney.gallerycrud.disk');
         $attribute_name = "images";
