@@ -23,5 +23,5 @@ Route::group([
     Route::get('gallery', function (\http\Env\Request $request) {
         return response()->json('test');
     });
-    Route::crud('gallery', 'GalleryCrudController');
+    Route::crud('gallery', 'admin\GalleryCrudController');
 });
