@@ -100,13 +100,6 @@ class GalleryCrudController extends CrudController {
                            'hint' => 'Will be automatically generated from your title, if left empty.',
                        ]);
 
-        CRUD::addField([    // WYSIWYG
-                            'name' => 'body',
-                            'label' => 'Body',
-                            'type' => 'ckeditor',
-                            'placeholder' => 'Your textarea text here',
-                       ]);
-
         CRUD::addField([ // Table
                          'name' => 'image_items',
                          'label' => 'Images',
@@ -127,6 +120,15 @@ class GalleryCrudController extends CrudController {
                             'name' => 'status',
                             'allows_null' => true,
                             'options' => [0 => 'Draft', 1 => 'Published'],
+                            'value' => null,
+                       ]);
+
+        CRUD::addField([    // SELECT
+                            'label' => 'Public',
+                            'type' => 'select_from_array',
+                            'name' => 'public',
+                            'allows_null' => true,
+                            'options' => [0 => 'Not public', 1 => 'Public'],
                             'value' => null,
                        ]);
     }
